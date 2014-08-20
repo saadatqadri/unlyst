@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Property list</h1>
+
+<ul>
+	{% for prop in object_list %}
+	<li class="prop">{{ prop.street_address }}</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

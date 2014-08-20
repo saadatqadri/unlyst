@@ -5,8 +5,8 @@ from django.db import models
 class Property(models.Model):
 
 	HOME_TYPE_CHOICES = (
-		('House', 'HOUSE'),
-		('Condo', 'Condominium')
+		('H', 'House'),
+		('C', 'Condominium')
 	)
 
 	CITY_CHOICES = (
@@ -43,6 +43,7 @@ class Property(models.Model):
 		('NEVER', 'Would never sell')
 	)
 
+	slug = models.SlugField(max_length=255, unique=False)
 	home_type = models.CharField(max_length=25, choices=HOME_TYPE_CHOICES)
 	street_number = models.PositiveIntegerField()
 	street_address = models.CharField(max_length=255)
@@ -55,7 +56,22 @@ class Property(models.Model):
 	num_beds = models.CharField(max_length=25, choices=BEDROOM_CHOICES)
 	num_baths = models.CharField(max_length=25, choices=BATH_CHOICES)
 	num_park = models.IntegerField()
-	unlysted_value = models.PositiveIntegerField()
+	unlysted_value = models.PositiveIntegerField(blank=True)
 	status = models.CharField(max_length=25, choices=STATUS_CHOICES)
-	photo = models.ImageField(upload_to='images')
+	photo = models.ImageField(upload_to='images', blank=True)
+
+	def __unicode__(self):
+		return '_'.join([
+			str(self.street_number),
+			self.street_address,
+			self.city,
+		])
+
+	@models.permalink
+	def get_absolute_url(self):
+		return('property-feed', (), {
+			'property_slug': self.slug,
+			'pk': self.id
+			})
+
 
