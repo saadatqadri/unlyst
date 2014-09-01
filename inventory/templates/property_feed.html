@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+
+{% block content %}
+<h1>Unlyst Feed</h1>
+
+<ul>
+	{% for prop in object_list %}
+	<li class="prop">{{ prop.street_number }} {{ prop.street_address }}. Valuation: {{ prop.unlysted_value | intcomma }}</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

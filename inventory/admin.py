@@ -14,6 +14,7 @@ class PropertyAdmin(admin.ModelAdmin):
 	lists_per_page = 50
 	ordering = ['-city']
 	search_fields = ['city']
-	prepopulated_fields = {'slug': ('street_number', 'street_address')}
+	exclude=['identifier']
+	#prepopulated_fields = {'identifier': ('street_number', 'street_address')}
 
 admin.site.register(Property, PropertyAdmin)

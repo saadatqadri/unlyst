@@ -1,11 +1,16 @@
 {% extends "base.html" %}
+{% load humanize %}
+
 
 {% block content %}
-<h1>Property list</h1>
+<h1>Unlyst Feed</h1>
+<a class="btn btn-large" href="{% url 'property-new' %}">Add Property</a>
 
 <ul>
 	{% for prop in object_list %}
-	<li class="prop">{{ prop.street_address }}</li>
+	<li class="prop">{{ prop.identifier }}{{ prop.street_number }} {{ prop.street_address }}. Valuation: {{ prop.unlysted_value | intcomma }} {{ prop.photo }}</li>
+
+	<img src="{{ MEDIA_URL }}/{{ prop.photo }}" alt="{{ prop.photo }}" />
 	{% endfor %}
 </ul>
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.core.urlresolvers import reverse
 
 from inventory.models import Property
@@ -19,3 +19,7 @@ class CreatePropertyView(CreateView):
 
 	def get_success_url(self):
 		return reverse('property-list')
+
+class DetailPropertyView(DetailView):
+	model = Property
+	template_name = 'property_feed.html'

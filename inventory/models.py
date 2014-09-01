@@ -1,6 +1,12 @@
 from django.db import models
+import random
+import string
 
 # Create your models here.
+
+def random_key(size):
+	return ''.join([random.choice(string.letters + string.digits) for i in range(size)])
+
 
 class Property(models.Model):
 
@@ -43,7 +49,7 @@ class Property(models.Model):
 		('NEVER', 'Would never sell')
 	)
 
-	slug = models.SlugField(max_length=255, unique=False)
+	identifier = models.CharField(max_length=16, unique=True)
 	home_type = models.CharField(max_length=25, choices=HOME_TYPE_CHOICES)
 	street_number = models.PositiveIntegerField()
 	street_address = models.CharField(max_length=255)
@@ -66,6 +72,11 @@ class Property(models.Model):
 			self.street_address,
 			self.city,
 		])
+
+	def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+		if self.identifier is None or len(self.identifier) == 0:
+			self.identifier = random_key(16)
+		models.Model.save(self, force_insert, force_update, using, update_fields)
 
 	@models.permalink
 	def get_absolute_url(self):
