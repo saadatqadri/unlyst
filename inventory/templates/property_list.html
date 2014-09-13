@@ -8,9 +8,8 @@
 
 <ul>
 	{% for prop in object_list %}
-	<li class="prop">{{ prop.identifier }}{{ prop.street_number }} {{ prop.street_address }}. Valuation: {{ prop.unlysted_value | intcomma }} {{ prop.photo }}</li>
-
-	<img src="{{ MEDIA_URL }}/{{ prop.photo }}" alt="{{ prop.photo }}" />
+	<li><a href="{{ prop.get_absolute_url }}">{{ prop.identifier }}</a> {{ prop.street_number }} {{ prop.street_address }}. Valuation: {{ prop.unlysted_value | intcomma }}</li>
+	(<a href="{% url "property-edit" pk=prop.id %}">edit</a>)
 	{% endfor %}
 </ul>
 

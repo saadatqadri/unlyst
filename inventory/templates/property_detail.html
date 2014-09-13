@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+
+{% block content %}
+<h1>Property Detail</h1>
+
+<ul>
+	<li class="prop">{{ property.street_number }} {{ property.street_address }}. Valuation: {{ property.unlysted_value | intcomma }}</li>
+	<img src="{{ MEDIA_URL }}/{{ property.photo }}" alt="{{ property.photo }}" />
+</ul>
+
+{% endblock %}

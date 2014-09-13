@@ -12,7 +12,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	url(r'^$', inventory.views.ListPropertyView.as_view(), name='property-list'),
 	url(r'^new$', inventory.views.CreatePropertyView.as_view(), name='property-new'),
-    url(r'^feed/<pk=id>$', inventory.views.DetailPropertyView.as_view(), name='property-detail'),
+    url(r'^edit/(?P<pk>\d+)/$', inventory.views.UpdatePropertyView.as_view(), name='property-edit'),
+    url(r'^p/(?P<pk>\d+)/$', inventory.views.DetailPropertyView.as_view(), name='property-view'),
     # Examples:
     # url(r'^$', 'unlyst.views.home', name='home'),
     # url(r'^unlyst/', include('unlyst.foo.urls')),

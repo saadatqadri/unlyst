@@ -1,6 +1,7 @@
 from django.db import models
 import random
 import string
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -78,11 +79,7 @@ class Property(models.Model):
 			self.identifier = random_key(16)
 		models.Model.save(self, force_insert, force_update, using, update_fields)
 
-	@models.permalink
 	def get_absolute_url(self):
-		return('property-feed', (), {
-			'property_slug': self.slug,
-			'pk': self.id
-			})
+		return reverse('property-view', kwargs={'pk': self.id})
 
 
