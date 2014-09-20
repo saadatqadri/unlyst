@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 	url(r'^new$', inventory.views.CreatePropertyView.as_view(), name='property-new'),
     url(r'^edit/(?P<pk>\d+)/$', inventory.views.UpdatePropertyView.as_view(), name='property-edit'),
     url(r'^p/(?P<pk>\d+)/$', inventory.views.DetailPropertyView.as_view(), name='property-view'),
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
     # Examples:
     # url(r'^$', 'unlyst.views.home', name='home'),
     # url(r'^unlyst/', include('unlyst.foo.urls')),

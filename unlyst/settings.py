@@ -117,6 +117,7 @@ WSGI_APPLICATION = 'unlyst.wsgi.application'
 
 TEMPLATE_DIRS = (
     location('templates'),
+    location('/accounts/templates')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -130,6 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventory',
+    'sorl-thumbnail',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.humanize',
@@ -171,3 +173,7 @@ try:
 except ImportError:
     pass
 
+## UNLYST SPECIFIC settings
+
+
+LOGIN_REDIRECT_URL = '/'
